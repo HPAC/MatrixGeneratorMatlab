@@ -7,9 +7,8 @@ classdef UpperTriangular
         function obj = UpperTriangular()
         end
         
-        function [band, symmetric] = to_band(obj, size)
-            band = MatrixGenerator.Shapes.Band(0, size(2) - 1);
-            symmetric = false;
+        function [band] = to_band(~, size)
+            band = MatrixGenerator.Shapes.Band(0, size(2) - 1, false);
         end
     end
     

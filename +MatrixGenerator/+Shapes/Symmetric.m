@@ -7,9 +7,8 @@ classdef Symmetric
         function obj = Symmetric()
         end
         
-        function [band, symmetric] = to_band(obj, size)
-            band = MatrixGenerator.Shapes.Band(size(1) - 1, size(2) - 1);
-            symmetric = true;
+        function [band] = to_band(~, size)
+            band = MatrixGenerator.Shapes.Band(size(1) - 1, size(2) - 1, true);
         end
     end
     

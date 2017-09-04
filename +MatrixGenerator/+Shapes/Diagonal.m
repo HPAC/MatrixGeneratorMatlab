@@ -7,9 +7,8 @@ classdef Diagonal
         function obj = Diagonal()
         end
         
-        function [band, symmetric] = to_band(obj, size)
-            band = MatrixGenerator.Shapes.Band(0, 0);
-            symmetric = true;
+        function [band] = to_band(~, size)
+            band = MatrixGenerator.Shapes.Band(0, 0, true);
         end
     end
     

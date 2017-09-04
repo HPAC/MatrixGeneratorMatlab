@@ -11,7 +11,6 @@ classdef Band < handle
             obj.LowerBandwidth = lower;
             obj.UpperBandwidth = upper;
             obj.Symmetric = false;
-            disp(nargin)
             if nargin > 3
                error('Only two or three parameters are allowed in the constructor')
             elseif nargin == 3
