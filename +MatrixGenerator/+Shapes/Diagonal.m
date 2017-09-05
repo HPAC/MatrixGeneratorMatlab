@@ -1,4 +1,4 @@
-classdef Diagonal
+classdef Diagonal < MatrixGenerator.Shapes.ShapeType
     
     properties
     end

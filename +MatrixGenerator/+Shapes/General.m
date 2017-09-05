@@ -1,5 +1,4 @@
-
-classdef General
+classdef General < MatrixGenerator.Shapes.ShapeType
     
     properties
     end

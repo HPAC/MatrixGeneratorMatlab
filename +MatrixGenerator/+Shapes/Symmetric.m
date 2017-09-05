@@ -1,4 +1,4 @@
-classdef Symmetric
+classdef Symmetric < MatrixGenerator.Shapes.ShapeType
     
     properties
     end

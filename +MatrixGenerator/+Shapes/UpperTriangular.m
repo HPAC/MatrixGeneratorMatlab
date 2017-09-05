@@ -1,4 +1,4 @@
-classdef UpperTriangular
+classdef UpperTriangular < MatrixGenerator.Shapes.ShapeType
     
     properties
     end
