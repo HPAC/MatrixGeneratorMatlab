@@ -1,15 +1,29 @@
 classdef Random < MatrixGenerator.Properties.PropertyType
     
+    properties
+        Boundaries
+    end
+    
     methods
+        
+        function obj = Random(varargin)
+            if isempty(varargin)
+                obj.Boundaries = [-1 1];
+            elseif length(varargin) == 1 && length(varargin{1}) == 2
+                obj.Boundaries = varargin{1}; 
+            else
+                error('Incorrect settings for Random property');
+            end
+        end
         
         function [matrix] = generate(obj, size, type, varargin)
             
-            boundaries = [-1 1];
+            boundaries = obj.Boundaries;
             for i = 1:length(varargin)
                 if isa(varargin{i}, 'MatrixGenerator.Properties.Positive')
-                    boundaries = [0 1];
+                    boundaries = [0 obj.Boundaries(2)];
                 elseif isa(varargin{i}, 'MatrixGenerator.Properties.Negative')
-                    boundaries = [-1 0];
+                    boundaries = [obj.Boundaries(1) 0];
                 end
             end
             
