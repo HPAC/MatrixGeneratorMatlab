@@ -51,7 +51,11 @@ function [matrix] = random_triangular(boundaries, size, uplo)
 end
 
 function [matrix] = random_diagonal(boundaries, matrix_size)
-    matrix = boundaries(1) + (boundaries(2) - boundaries(1))*rand(size);
-    disp(matrix)
-    matrix = diag(matrix);
+    diag_size = min(matrix_size(1), matrix_size(2));
+    matrix = diag( boundaries(1) + (boundaries(2) - boundaries(1))*rand(diag_size, 1) );
+    if matrix_size(1) > matrix_size(2)
+        matrix = [matrix; zeros(matrix_size(1) - diag_size, matrix_size(2))];
+    elseif matrix_size(1) < matrix_size(2)
+        matrix = [matrix zeros(diag_size, matrix_size(2) - diag_size)];
+    end
 end
