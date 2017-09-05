@@ -27,15 +27,15 @@ classdef Random < MatrixGenerator.Properties.PropertyType
                 end
             end
             
-            if isa(type, 'MatrixGenerator.Shapes.General')
+            if isa(type, 'MatrixGenerator.Shape.General')
                 matrix = random_general(boundaries, size);
-            elseif isa(type, 'MatrixGenerator.Shapes.Symmetric')
+            elseif isa(type, 'MatrixGenerator.Shape.Symmetric')
                 matrix = random_symmetric(boundaries, size);
-            elseif isa(type, 'MatrixGenerator.Shapes.UpperTriangular')
+            elseif isa(type, 'MatrixGenerator.Shape.UpperTriangular')
                 matrix = random_triangular(boundaries, size, 'U');
-            elseif isa(type, 'MatrixGenerator.Shapes.LowerTriangular')
+            elseif isa(type, 'MatrixGenerator.Shape.LowerTriangular')
                 matrix = random_triangular(boundaries, size, 'L');
-            elseif isa(type, 'MatrixGenerator.Shapes.Diagonal')
+            elseif isa(type, 'MatrixGenerator.Shape.Diagonal')
                 matrix = random_diagonal(boundaries, size);
             else
                 error('Unknown matrix type');
