@@ -1,4 +1,4 @@
-classdef Band < MatrixGenerator.Shapes.ShapeType
+classdef Band < MatrixGenerator.Shape.ShapeType
     
     properties
         LowerBandwidth
@@ -37,15 +37,15 @@ classdef Band < MatrixGenerator.Shapes.ShapeType
         % FIXME: add casting to Band() when we add band generators
         function [matrix] = cast(obj)
             if obj.LowerBandwidth == 0 && obj.UpperBandwidth == 0
-                matrix = MatrixGenerator.Shapes.Diagonal();
+                matrix = MatrixGenerator.Shape.Diagonal();
             elseif obj.LowerBandwidth == 0
-                matrix = MatrixGenerator.Shapes.UpperTriangular();
+                matrix = MatrixGenerator.Shape.UpperTriangular();
             elseif obj.UpperBandwidth == 0
-                matrix = MatrixGenerator.Shapes.LowerTriangular();
+                matrix = MatrixGenerator.Shape.LowerTriangular();
             elseif obj.Symmetric
-                matrix = MatrixGenerator.Shapes.Symmetric();
+                matrix = MatrixGenerator.Shape.Symmetric();
             else
-                matrix = MatrixGenerator.Shapes.General();
+                matrix = MatrixGenerator.Shape.General();
             end
         end
     end

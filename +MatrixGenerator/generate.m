@@ -10,9 +10,9 @@ end
 function [band, algorithm, properties] = process_args(size, varargin)
 
     properties = [];
-    band = MatrixGenerator.Shapes.Band(intmax, intmax);
+    band = MatrixGenerator.Shape.Band(intmax, intmax);
     for i = 1:length(varargin)
-        if isa(varargin{i}, 'MatrixGenerator.Shapes.ShapeType')
+        if isa(varargin{i}, 'MatrixGenerator.Shape.ShapeType')
             band.merge_with(varargin{i}.to_band(size));
         elseif isa(varargin{i}, 'MatrixGenerator.Properties.PropertyType')
             % Ignore properties others than the first match

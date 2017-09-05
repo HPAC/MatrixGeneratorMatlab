@@ -1,4 +1,4 @@
-classdef Diagonal < MatrixGenerator.Shapes.ShapeType
+classdef Diagonal < MatrixGenerator.Shape.ShapeType
     
     properties
     end
@@ -8,7 +8,7 @@ classdef Diagonal < MatrixGenerator.Shapes.ShapeType
         end
         
         function [band] = to_band(~, size)
-            band = MatrixGenerator.Shapes.Band(0, 0, true);
+            band = MatrixGenerator.Shape.Band(0, 0, true);
         end
     end
     

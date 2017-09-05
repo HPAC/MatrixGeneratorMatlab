@@ -1,4 +1,4 @@
-classdef Symmetric < MatrixGenerator.Shapes.ShapeType
+classdef Symmetric < MatrixGenerator.Shape.ShapeType
     
     properties
     end
@@ -8,7 +8,7 @@ classdef Symmetric < MatrixGenerator.Shapes.ShapeType
         end
         
         function [band] = to_band(~, size)
-            band = MatrixGenerator.Shapes.Band(size(1) - 1, size(2) - 1, true);
+            band = MatrixGenerator.Shape.Band(size(1) - 1, size(2) - 1, true);
         end
     end
     

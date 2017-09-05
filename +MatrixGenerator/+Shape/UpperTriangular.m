@@ -1,4 +1,4 @@
-classdef UpperTriangular < MatrixGenerator.Shapes.ShapeType
+classdef UpperTriangular < MatrixGenerator.Shape.ShapeType
     
     properties
     end
@@ -8,7 +8,7 @@ classdef UpperTriangular < MatrixGenerator.Shapes.ShapeType
         end
         
         function [band] = to_band(~, size)
-            band = MatrixGenerator.Shapes.Band(0, size(2) - 1, false);
+            band = MatrixGenerator.Shape.Band(0, size(2) - 1, false);
         end
     end
     
