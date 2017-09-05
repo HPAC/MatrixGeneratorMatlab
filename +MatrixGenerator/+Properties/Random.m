@@ -47,15 +47,18 @@ classdef Random < MatrixGenerator.Properties.PropertyType
 end
 
 function [matrix] = random_general(boundaries, size)
+    disp('Generate Random General')
     matrix = boundaries(1) + (boundaries(2) - boundaries(1))*rand(size);
 end
 
 function [matrix] = random_symmetric(boundaries, size)
+    disp('Generate Random Symmetric')
     matrix = random_general(boundaries, size);
     matrix = matrix + matrix';
 end
 
 function [matrix] = random_triangular(boundaries, size, uplo)
+    disp('Generate Random Triangular')
     matrix = random_general(boundaries, size);
     if uplo == 'U'
         matrix = triu(matrix);
@@ -65,6 +68,7 @@ function [matrix] = random_triangular(boundaries, size, uplo)
 end
 
 function [matrix] = random_diagonal(boundaries, matrix_size)
+    disp('Generate Random Diagonal')
     diag_size = min(matrix_size(1), matrix_size(2));
     matrix = diag( boundaries(1) + (boundaries(2) - boundaries(1))*rand(diag_size, 1) );
     if matrix_size(1) > matrix_size(2)

@@ -2,8 +2,6 @@
 function [matrix] = generate(size, varargin)
     
     [band, algorithm, properties] = process_args(size, varargin{:});
-    disp(band)  
-    disp(algorithm)
     matrix = algorithm.generate(size, band, properties);
 end
 
