@@ -30,7 +30,8 @@ function [band, algorithm, properties] = process_args(size, varargin)
 end
 
 function [val] = is_major_property(property)
-    if isa(property, 'MatrixGenerator.Properties.Random')
+    if isa(property, 'MatrixGenerator.Properties.Random') ||...
+        isa(property, 'MatrixGenerator.Properties.SPD')
         val = true;
     else
         val = false;
