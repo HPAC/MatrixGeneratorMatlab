@@ -15,6 +15,8 @@ classdef Benchmarker < handle
             t = toc();
 
             for i=1:iters
+                % Perform cache scrub
+                rand(5000, 5000) + rand(5000, 5000);
                 tic();
                 f();
                 timings(i) = toc();
