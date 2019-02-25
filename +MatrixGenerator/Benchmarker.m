@@ -1,44 +1,37 @@
 classdef Benchmarker < handle
-    
+
     properties
+        Timings = cell(0, 0);
         Results = cell(0, 5);
     end
-    
+
     methods
-        
-        function benchmark(obj, label, iters, f)
-            timings = zeros(iters, 1);  
-            
-            % Warmup call
-            tic();
-            f();
-            t = toc();
+
+        function res = benchmark(obj, label, iters, f)
+            timings = zeros(iters, 1);
 
             for i=1:iters
-                % Perform cache scrub
-                rand(5000, 5000) + rand(5000, 5000);
-                tic();
-                f();
-                timings(i) = toc();
+                rand(5000, 5000) + rand(5000, 5000); % Perform cache scrub
+                [res, time] = f();
+                timings(i) = time;
             end
 
-            % Process results
-            avg_ = mean(timings);
-            stddev_ = std(timings);
-            min_ = min(timings);
-            max_ = max(timings);
+            % Process results (exclude first warmup run)
+            avg_ = mean(timings(2:end));
+            stddev_ = std(timings(2:end));
+            min_ = min(timings(2:end));
+            max_ = max(timings(2:end));
             obj.Results(size(obj.Results, 1) + 1, :) = {label avg_ stddev_ min_ max_};
+            obj.Timings(size(obj.Timings, 1) + 1, :) = {label timings(:)};
         end
-        
+
         function save(obj, filename)
-            % The easiest way to write to file a cell array
-            % is to convert it to a table
-            % https://www.mathworks.com/examples/matlab/mw/matlab-ex07445498-export-cell-array-to-text-file
             writetable(cell2table(obj.Results, 'VariableNames', {'algorithm', 'Time', 'StdDev', 'Min', 'Max'}),...
                 filename, 'Delimiter', '\t');
+            writetable(cell2table(obj.Timings), strcat(filename, '.timings'), 'Delimiter', '\t');
         end
-        
+
     end
-    
+
 end
 
