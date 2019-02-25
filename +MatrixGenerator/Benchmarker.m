@@ -28,7 +28,9 @@ classdef Benchmarker < handle
         function save(obj, filename)
             writetable(cell2table(obj.Results, 'VariableNames', {'algorithm', 'Time', 'StdDev', 'Min', 'Max'}),...
                 filename, 'Delimiter', '\t');
-            writetable(cell2table(obj.Timings), strcat(filename, '.timings'), 'Delimiter', '\t');
+            temp = split(filename, '.');
+            timings_filename = strcat(temp{1}, '_timings.', temp{2});
+            writetable(cell2table(obj.Timings), timings_filename, 'Delimiter', '\t');
         end
 
     end
