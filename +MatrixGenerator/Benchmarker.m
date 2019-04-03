@@ -10,7 +10,11 @@ classdef Benchmarker < handle
         function res = benchmark(obj, label, iters, f)
             timings = zeros(iters, 1);
 
-            for i=1:iters
+            rand(5000, 5000) + rand(5000, 5000); % Perform cache scrub
+            [res, time] = f();
+            timings(1) = time;
+
+            for i=2:iters
                 rand(5000, 5000) + rand(5000, 5000); % Perform cache scrub
                 [res, time] = f();
                 timings(i) = time;
