@@ -70,7 +70,7 @@ end
 function [matrix] = random_diagonal(boundaries, matrix_size)
     disp('Generate Random Diagonal')
     diag_size = min(matrix_size(1), matrix_size(2));
-    matrix = diag( boundaries(1) + (boundaries(2) - boundaries(1))*rand(diag_size, 1) );
+    matrix = diag(sign(rand(diag_size, 1) - 0.5)*10 + (rand(diag_size, 1) - 0.5));
     if matrix_size(1) > matrix_size(2)
         matrix = [matrix; zeros(matrix_size(1) - diag_size, matrix_size(2))];
     elseif matrix_size(1) < matrix_size(2)
