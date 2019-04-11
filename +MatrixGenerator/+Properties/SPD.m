@@ -35,7 +35,7 @@ end
 
 function [matrix] = spd_symmetric(size)
     disp('Generate SPD Symmetric')
-    n = size(1)
+    n = size(1);
     tmp = randn(n, n);
     matrix = tril(tmp) + transpose(tril(tmp, -1)) + (2*sqrt(n)+3)*eye(n, n);
 end
