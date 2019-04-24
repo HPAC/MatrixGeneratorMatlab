@@ -59,11 +59,12 @@ end
 
 function [matrix] = random_triangular(boundaries, size, uplo)
     disp('Generate Random Triangular')
-    matrix = random_general(boundaries, size);
+    diag_size = min(size(1), size(2));
+    tmp = sign(rand(diag_size, 1) - 0.5)*5 + (rand(diag_size, 1) - 0.5);
     if uplo == 'U'
-        matrix = triu(matrix);
+        matrix = triu((rand(size(1), size(2)) - 0.5)*0.5, 1) + diag(tmp);
     else
-        matrix = tril(matrix);
+        matrix = tril((rand(size(1), size(2)) - 0.5)*0.5, -1) + diag(tmp);
     end
 end
 
