@@ -35,9 +35,9 @@ end
 
 function [matrix] = spd_symmetric(size)
     disp('Generate SPD Symmetric')
-    % from interval (-1, 1)
-    matrix = tril(2*rand(size(1), size(2)) - 1);
-    matrix = matrix*matrix' + eye(size(1)) * size(1);
+    n = size(1);
+    tmp = randn(n, n);
+    matrix = tril(tmp) + transpose(tril(tmp, -1)) + (2*sqrt(n)+3)*eye(n, n);
 end
 
 function [matrix] = spd_triangular(~, ~)
@@ -46,5 +46,5 @@ end
 
 function [matrix] = spd_diagonal(matrix_size)
     disp('Generate SPD Diagonal')
-    matrix = diag( rand(matrix_size(1), 1) );
+    matrix = diag( 9.5 + rand(matrix_size(1), 1) );
 end

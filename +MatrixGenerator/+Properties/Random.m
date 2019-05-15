@@ -59,18 +59,22 @@ end
 
 function [matrix] = random_triangular(boundaries, size, uplo)
     disp('Generate Random Triangular')
-    matrix = random_general(boundaries, size);
+    rows = size(1);
+    cols = size(2);
+    diag_size = min(rows, cols);
+    tmp = sign(rand(diag_size, 1) - 0.5)*5 + (rand(diag_size, 1) - 0.5);
+    D = [diag(tmp), zeros(diag_size, cols-diag_size); zeros(rows-diag_size, diag_size), zeros(rows-diag_size, cols-diag_size)];
     if uplo == 'U'
-        matrix = triu(matrix);
+        matrix = triu((rand(rows, cols) - 0.5)*0.5, 1) + D;
     else
-        matrix = tril(matrix);
+        matrix = tril((rand(rows, cols) - 0.5)*0.5, -1) + D;
     end
 end
 
 function [matrix] = random_diagonal(boundaries, matrix_size)
     disp('Generate Random Diagonal')
     diag_size = min(matrix_size(1), matrix_size(2));
-    matrix = diag( boundaries(1) + (boundaries(2) - boundaries(1))*rand(diag_size, 1) );
+    matrix = diag(sign(rand(diag_size, 1) - 0.5)*10 + (rand(diag_size, 1) - 0.5));
     if matrix_size(1) > matrix_size(2)
         matrix = [matrix; zeros(matrix_size(1) - diag_size, matrix_size(2))];
     elseif matrix_size(1) < matrix_size(2)
