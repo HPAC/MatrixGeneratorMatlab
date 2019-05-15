@@ -3,6 +3,7 @@ classdef Benchmarker < handle
     properties
         Timings = cell(0, 0);
         Results = cell(0, 5);
+        cs = rand(1, 7500000);
     end
 
     methods
@@ -10,12 +11,12 @@ classdef Benchmarker < handle
         function res = benchmark(obj, label, iters, f)
             timings = zeros(iters, 1);
 
-            rand(5000, 5000) + rand(5000, 5000); % Perform cache scrub
+            obj.cs = obj.cs + 1e-4;
             [res, time] = f();
             timings(1) = time;
 
             for i=2:iters
-                rand(5000, 5000) + rand(5000, 5000); % Perform cache scrub
+                obj.cs = obj.cs + 1e-4;
                 [res, time] = f();
                 timings(i) = time;
             end
