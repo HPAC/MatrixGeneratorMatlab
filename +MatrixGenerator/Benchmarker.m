@@ -1,21 +1,21 @@
 classdef Benchmarker < handle
 
-    properties
-        Timings = cell(0, 0);
-        Results = cell(0, 5);
-        cs = rand(1, 7500000);
+properties
+Timings = cell(0, 0);
+Results = cell(0, 5);
+cs = rand(1, 7500000);
     end
 
     methods
 
-        function res = benchmark(obj, label, iters, f)
-            timings = zeros(iters, 1);
+    function res = benchmark(obj, label, iters, f)
+    timings = zeros(iters, 1);
 
-            obj.cs = obj.cs + 1e-4;
-            [res, time] = f();
-            timings(1) = time;
+    obj.cs = obj.cs + 1e-4;
+    [res, time] = f();
+    timings(1) = time;
 
-            for i=2:iters
+    for i=2:iters
                 obj.cs = obj.cs + 1e-4;
                 [res, time] = f();
                 timings(i) = time;
@@ -31,12 +31,14 @@ classdef Benchmarker < handle
         end
 
         function save(obj, filename)
-            writetable(cell2table(obj.Results, 'VariableNames', {'algorithm', 'Time', 'StdDev', 'Min', 'Max'}),...
-                filename, 'Delimiter', '\t');
-            temp = split(filename, '.');
-            timings_filename = strcat(temp{1}, '_timings.', temp{2});
-            writetable(cell2table(obj.Timings), timings_filename, 'Delimiter', '\t');
-        end
+        fid = fopen (filename, "w");
+        fprintf (fid, "%s \t %f \t %f \t %f \t %f\n", obj.Results'{:});
+        fclose (fid);
+        writetable(cell2table(obj.Results, 'VariableNames', {'algorithm', 'Time', 'StdDev', 'Min', 'Max'}), filename, 'Delimiter', '\t');
+        temp = split(filename, '.');
+        timings_filename = strcat(temp{1}, '_timings.', temp{2});
+        writetable(cell2table(obj.Timings), timings_filename, 'Delimiter', '\t');
+      end
 
     end
 
